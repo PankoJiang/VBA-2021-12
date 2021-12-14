@@ -35,3 +35,24 @@ Dim i As Integer
 
 End Sub
 
+Sub CreateWorksheet2()
+Dim Sht As Worksheet
+
+'新建表，并确认是否重名
+For i = 1 To 3
+    
+    k = 0
+    For Each Sht In Sheets
+        If Sht.Name = Sheet1.Range("A" & i) Then
+            k = 1
+        End If
+    Next
+    
+    If k = 0 Then
+        Sheets.Add after:=Sheets(Sheets.Count)
+        Sheets(Sheets.Count).Name = Sheet1.Range("A" & i).Value
+    End If
+
+Next
+
+End Sub
