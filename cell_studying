@@ -3,7 +3,7 @@ Dim Rng As Range
 
 Call DataClear
 
-    '总数据按照部门分类贴入对应sheet
+    '总数据按照部门分类贴入对应sheet（逐行粘贴）
     For Each Rng In Range("D2:D" & Range("D65536").End(xlUp).Row)
     
         Rng.EntireRow.Copy Sheets(Rng.Value).Range("A65536").End(xlUp).Offset(1, 0)
@@ -22,3 +22,16 @@ Sub DataClear()
     Next
 
 End Sub
+
+Sub chaifen()
+Dim i As Integer
+    
+    '把总数据贴到既有的对应sheet中（筛选后粘贴）
+    For i = 2 To Sheets.Count
+        Sheet1.Range("A1:F1048").AutoFilter Field:=4, Criteria1:=Sheets(i).Name
+        Sheet1.Range("A1:F1048").Copy Sheets(i).Range("A1")
+    Next
+    Sheet1.Range("A1:F1048").AutoFilter
+
+End Sub
+
