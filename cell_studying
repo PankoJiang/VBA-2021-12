@@ -1,0 +1,24 @@
+Sub DepartmentBaseData()
+Dim Rng As Range
+
+Call DataClear
+
+    '总数据按照部门分类贴入对应sheet
+    For Each Rng In Range("D2:D" & Range("D65536").End(xlUp).Row)
+    
+        Rng.EntireRow.Copy Sheets(Rng.Value).Range("A65536").End(xlUp).Offset(1, 0)
+        
+    Next
+
+End Sub
+
+Sub DataClear()
+
+    '多sheets数据清空
+    For i = 2 To Sheets.Count
+        
+        Sheets(i).Range("A2:F10000").ClearContents
+        
+    Next
+
+End Sub
